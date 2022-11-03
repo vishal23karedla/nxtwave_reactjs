@@ -1,0 +1,30 @@
+.NavigationBar
+{
+    width: auto;
+    height: 72px;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 92.97%;
+  background: #FFFFFF;
+}
+
+#NxtWave_logo{
+    /* position: absolute;
+    left: 3.33%;
+    right: 90.97%;
+    top: 1.56%;
+    bottom: 94.53%; */
+    position: absolute;
+    left: 12.54%;
+    right: 82.81%;
+    top: 11.48%;
+    bottom: 58.08%;
+}
+
+
+.btn-success{
+    color: #2DCA73 !important;
+}
+

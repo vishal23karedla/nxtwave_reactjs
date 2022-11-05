@@ -21,7 +21,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/nxtwave_reactjs" element={<LoginPage />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/requests" element={<Requests />} />
           <Route path="/users" element={<Users />} />

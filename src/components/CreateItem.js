@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import office_image from '../assets/Office_Setup.jpg';
 
 const CreateItem = () => {
     const formInitialDetails = {
@@ -109,7 +110,7 @@ const CreateItem = () => {
                 </form>
             </div>
             <div className="col grid-child sideImage m-2 d-flex justify-content-end mx-auto d-none d-md-block">
-                <img src="/Office_Setup.jpg" alt="Office_Setup" style={{ height: "700px", width: "100%", marginTop: "30px" }} />
+                <img src={ office_image } alt="Office_Setup" style={{ height: "700px", width: "100%", marginTop: "30px" }} />
             </div>
         </div>
     </>)

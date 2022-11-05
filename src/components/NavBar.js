@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { LoginContext } from '../context/LoginContext';
 import { useNavigate } from 'react-router-dom';
+import NxtWaveLogo from '../assets/NxtWave TM_Coloured logo.png';
 
 const NavBar = () => {
 
@@ -24,7 +25,7 @@ const NavBar = () => {
         <Navbar collapseOnSelect expand="lg" bg="white" variant="light" className=''>
             <Navbar.Brand href="/">
                 <img
-                    src="NxtWave TM_Coloured logo.png"
+                    src= {NxtWaveLogo}
                     width="82"
                     height="40"
                     className="d-inline-block align-top m-1"

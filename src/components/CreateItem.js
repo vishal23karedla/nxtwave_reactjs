@@ -1,114 +1,118 @@
-import React, { useEffect, useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
-function CreateItem() {
+const CreateItem = () => {
+    const formInitialDetails = {
+        itemName: '',
+        link: '',
+        resourceName: '',
+        description: ''
+    }
 
-    const [itemTitle, setItemTitle] = useState("");
-    const [itemLink, setItemLink] = useState("");
-    const [resourceName, setResourceName] = useState("");
-    const [description, setDescription] = useState("");
+    const [formDetails, setFormDetails] = useState(formInitialDetails);
 
-    const [formErrors, setFormErrors] = useState({
-        itemTitleError: "",
-        itemLinkError: "",
-        resourceNameError: "",
-        descriptionError: ""
-    })
-    const [success, setSuccess] = useState("")
+    const onFormUpdate = (category, value) => {
+        setFormDetails({ ...formDetails, [category]: value })
+    }
 
-    const validateInput = (e) => {
-        // console.log(e.target);
-
-        if (e.target.id === "formGridItemTitle") {
-            let title = e.target.value;
-            if (title.length >= 3 && title.length <= 50) {
-                setFormErrors({ ...formErrors, itemTitleError: "" })
-            } else {
-                setFormErrors({ ...formErrors, itemTitleError: "Title should have 3 to 50 characters" });
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (formDetails.itemName === "" || formDetails.link === "" || formDetails.resourceName === "" || formDetails.description === "") {
+            toast.error("Form field cannot be empty!", {
+                position: toast.POSITION.BOTTOM_CENTER
+            });
+        } else {
+            if (formDetails.itemName.length < 3) {
+                toast.error("Title should have minimum 3 characters", {
+                    position: toast.POSITION.BOTTOM_CENTER
+                });
+            } else if (formDetails.link.length < 10) {
+                toast.error("Invalid URL", {
+                    position: toast.POSITION.BOTTOM_CENTER
+                });
+            } else if (formDetails.resourceName.length < 5) {
+                toast.error("Resource name should have minimum 5 characters", {
+                    position: toast.POSITION.BOTTOM_CENTER
+                });
+            } else if (formDetails.description.length < 6) {
+                toast.error("Description is too short", {
+                    position: toast.POSITION.BOTTOM_CENTER
+                });
+            }
+            else {
+                axios.post('https://media-content.ccbp.in/website/react-assignment/add_resource.json',formDetails)
+                    .then((res) => {
+                        console.log(res);
+                    })
+                    .catch((err)=> {
+                        console.log(err);
+                    }) 
+                    //giving CORS error
+                toast.success("Item created Successfully", {
+                    position: toast.POSITION.BOTTOM_CENTER
+                });
+                e.target.reset();
             }
         }
-        else if (e.target.id === "formGridItemLink") {
-            let link = e.target.value;
-            if (link.length > 10) {
-                setFormErrors({ ...formErrors, itemLinkError: "" })
-            } else {
-                setFormErrors({ ...formErrors, itemLinkError: "Invalid URL" });
-            }
-        }
-        else if (e.target.id === "formGridResourceName") {
-            let resource = e.target.value;
-            if (resource.length > 5) {
-                setFormErrors({ ...formErrors, resourceNameError: "" })
-            } else {
-                setFormErrors({ ...formErrors, resourceNameError: "Mobile Number should have 10 digits" });
-            }
-        }
-        else if (e.target.id === "formGridDescription") {
-            let description = e.target.value;
-            if (description.length > 6) {
-                setFormErrors({ ...formErrors, descriptionError: "" })
-            } else {
-                setFormErrors({ ...formErrors, descriptionError: "Description is too short" })
-            }
-
-        }
-    };
-
-    const onSubmit = (e) => {
-        // console.log(e);
-
-
-    };
+    }
 
     return (<>
-        <div class="grid-container">
-
-            <div class="grid-child createItemForm">
-                <h3 style={{ textAlign : 'center'}}>Item Details</h3>
-                <Form onSubmit={onSubmit}>
-                    <Form.Group controlId="formGridItemTitle">
-                        <Form.Label>ITEM TITLE</Form.Label>
-                        <Form.Control type="text" onChange={(e) => { setFormErrors({ ...formErrors, emptyFormError: "" }); validateInput(e); setItemTitle(e.target.value) }} />
-                        <Form.Label className='text-danger'>{formErrors.emptyFormError}</Form.Label>
-                        <Form.Label className='h6 text-danger'>{formErrors.itemTitleError}</Form.Label>
-                    </Form.Group>
-
-                    <Form.Group controlId="formGridItemLink">
-                        <Form.Label>LINK</Form.Label>
-                        <Form.Control type="url" onChange={(e) => { setFormErrors({ ...formErrors, emptyFormError: "" }); validateInput(e); setItemLink(e.target.value) }} />
-                        <Form.Label className='text-danger'>{formErrors.emptyFormError}</Form.Label>
-                        <Form.Label className='h6 text-danger'>{formErrors.itemLinkError}</Form.Label>
-                    </Form.Group>
-
-                    <Form.Group controlId="formGridResourceName">
-                        <Form.Label>RESOURCE NAME</Form.Label>
-                        <Form.Control type="text" onChange={(e) => { setFormErrors({ ...formErrors, emptyFormError: "" }); validateInput(e); setResourceName(e.target.value) }} />
-                        <Form.Label className='text-danger'>{formErrors.emptyFormError}</Form.Label>
-                        <Form.Label className='h6 text-danger'>{formErrors.resourceNameError}</Form.Label>
-                    </Form.Group>
-
-                    <Form.Group controlId="formGridDescription">
-                        <Form.Label>DESCRIPTION</Form.Label>
-                        <Form.Control as="textarea" rows={3} onChange={(e) => { setFormErrors({ ...formErrors, emptyFormError: "" }); validateInput(e); setDescription(e.target.value) }} />
-                        <Form.Label className='text-danger'>{formErrors.emptyFormError}</Form.Label>
-                        <Form.Label className='h6 text-danger'>{formErrors.descriptionError}</Form.Label>
-                    </Form.Group>
-
-                    <div className="d-grid gap-2 createButton" >
-                        <Button variant="success" size="lg" type="submit" >
-                            CREATE
-                        </Button>
+        <div className='row sm-12'>
+            <div className="col sm-12 registration-form">
+                <form onSubmit={handleSubmit}>
+                    <div className="text-center mb-2">
+                        <h3>Create Item</h3>
                     </div>
-                </Form>
-            </div>
+                    <div className="form-group">
+                        <label className='m-1'>ITEM NAME</label>
+                        <input type="text" className="form-control item" id="itemName" placeholder="Item Name"
+                            onChange={(e) => {
 
-            <div class="grid-child sideImage">
-                <img src="/Office_Setup.jpg" alt="Filler image" style={{ height: "750px"}} />
-            </div>
+                                onFormUpdate('itemName', e.target.value)
+                            }}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label className='m-1'>LINK</label>
+                        <input type="text" className="form-control item" id="link" placeholder="Link"
+                            onChange={(e) => {
 
+                                onFormUpdate('link', e.target.value)
+                            }}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label className='m-1'>RESOURCE NAME</label>
+                        <input type="text" className="form-control item" id="resourceName" placeholder="Resource Name"
+                            onChange={(e) => {
+
+                                onFormUpdate('resourceName', e.target.value)
+                            }}
+                        />
+
+                    </div>
+                    <div className="form-group">
+                        <label className='m-1'>DESCRIPTION</label>
+                        <input type="text-area" className="form-control desc-item" id="description" placeholder="Description"
+                            onChange={(e) => {
+
+                                onFormUpdate('description', e.target.value)
+                            }}
+                        />
+                    </div>
+                    <ToastContainer />
+                    <div className="form-group">
+                        <button type="submit" className="btn btn-primary create-account">Create</button>
+                    </div>
+                </form>
+            </div>
+            <div className="col grid-child sideImage m-2 d-flex justify-content-end mx-auto d-none d-md-block">
+                <img src="/Office_Setup.jpg" alt="Office_Setup" style={{ height: "700px", width: "100%", marginTop: "30px" }} />
+            </div>
         </div>
-    </>);
+    </>)
 }
 
 export default CreateItem;

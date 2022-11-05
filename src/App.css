@@ -78,3 +78,55 @@ nav a:hover {
   margin: auto;
   text-align: center;
 }
+
+/*********Create Item form css***********/
+
+.registration-form {
+  padding: 50px 0;
+}
+
+.registration-form form {
+  background-color: #fff;
+  max-width: 600px;
+  margin: auto;
+  padding: 50px 70px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+  font-weight: 700;
+  color: rgb(36, 34, 34);
+}
+
+.registration-form .item {
+  border-radius: 10px;
+  margin-bottom: 25px;
+  padding: 10px 20px;
+}
+
+.registration-form .desc-item {
+  border-radius: 10px;
+  margin-bottom: 25px;
+  padding: 10px 20px;
+  height: 80px;
+}
+
+.registration-form .create-account {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto;
+  display: block;
+}
+
+@media (max-width: 576px) {
+  .registration-form form {
+    padding: 50px 20px;
+  }
+} 
+
+.search-inp{
+  width: 50%;
+  color: antiquewhite;
+  padding-left: 120px;
+  /* background-color: red; */
+}  

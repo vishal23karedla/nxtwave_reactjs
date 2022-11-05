@@ -9,7 +9,7 @@ const ResourceDetails = () => {
     const resourceId = useParams().id;
 
     useEffect(() => {
-        console.log(resourceId)
+        // console.log(resourceId)
         axios.get(`https://media-content.ccbp.in/website/react-assignment/resource/${resourceId}.json`)
             .then(result => {
                 //console.log(result.data.resource_items)

@@ -3,15 +3,15 @@ import { NavLink } from 'react-router-dom'
 
 const SwitchTabs = () => {
 
-    const switchBarStyle = { width : "10 px", height : "80px" , background : "" };
-    const switchButtonStyle = { height: "50px" , background : "" , width : "375px" , display : "flex" ,margin : "auto"};
+    const switchBarStyle = { width : "15 px", height : "80px" , background : "" };
+    const switchButtonStyle = { height: "50px" , background : "" , width : "350px" , display : "flex" ,margin : "auto"};
 
     return (<>
         <div className='m-4' style={ switchBarStyle}>
             <nav style={ switchButtonStyle }>
                 <NavLink 
                     className={({ isActive }) => (isActive ? "link-active" : "link")}
-                    to="/"
+                    to="/resources"
                 >
                     Resources
                 </NavLink>

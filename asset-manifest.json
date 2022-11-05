@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/nxtwave_reactjs/static/css/main.7c47f257.css",
-    "main.js": "/nxtwave_reactjs/static/js/main.a43db98f.js",
+    "main.js": "/nxtwave_reactjs/static/js/main.099464fb.js",
     "static/js/787.81242817.chunk.js": "/nxtwave_reactjs/static/js/787.81242817.chunk.js",
+    "static/media/Office_Setup.jpg": "/nxtwave_reactjs/static/media/Office_Setup.6863ed08523e5c3c6ebc.jpg",
     "index.html": "/nxtwave_reactjs/index.html",
     "main.7c47f257.css.map": "/nxtwave_reactjs/static/css/main.7c47f257.css.map",
-    "main.a43db98f.js.map": "/nxtwave_reactjs/static/js/main.a43db98f.js.map",
+    "main.099464fb.js.map": "/nxtwave_reactjs/static/js/main.099464fb.js.map",
     "787.81242817.chunk.js.map": "/nxtwave_reactjs/static/js/787.81242817.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7c47f257.css",
-    "static/js/main.a43db98f.js"
+    "static/js/main.099464fb.js"
   ]
 }
